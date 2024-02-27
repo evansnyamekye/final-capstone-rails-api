@@ -6,14 +6,14 @@ default: &default
 development:
   <<: *default
   database: final_capstone_rails_api_development
-  username: postgres
-  password: tshepi14c
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
 
 test:
   <<: *default
   database: final_capstone_rails_api_test
-  username: postgres
-  password: tshepi14c
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
 
 production:
   <<: *default
