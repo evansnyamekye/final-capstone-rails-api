@@ -22,9 +22,19 @@ class Api::V1::PlacesController < ApplicationController
     @place = Place.new(place_params)
 
     if @place.save
-      render json: @place, status: :created, location: @place
+      render json: {
+        status: {
+          code: 200,
+          message: 'Place created successfully'
+        }
+      }, status: :ok
     else
-      render json: @place.errors, status: :unprocessable_entity
+      render json: {
+        status: {
+          message: "Place could not be created",
+          errors: @place.errors.full_messages
+        }
+      }, status: :unprocessable_entity
     end
   end
 
@@ -51,6 +61,6 @@ class Api::V1::PlacesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def place_params
-    params.require(:place).permit(:description, :photo, :location, :rate, :user_id)
+    params.require(:place).permit(:description, :photo, :location, :rate, :user_id, :address)
   end
 end
