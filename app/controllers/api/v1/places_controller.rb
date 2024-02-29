@@ -12,6 +12,11 @@ class Api::V1::PlacesController < ApplicationController
     render json: @place
   end
 
+  def new
+    @place = Place.new
+    render json: @place 
+  end
+
   # POST /places
   def create
     @place = Place.new(place_params)
