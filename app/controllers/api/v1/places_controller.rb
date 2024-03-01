@@ -22,19 +22,9 @@ class Api::V1::PlacesController < ApplicationController
     @place = Place.new(place_params)
 
     if @place.save
-      render json: {
-        status: {
-          code: 200,
-          message: 'Place created successfully'
-        }
-      }, status: :ok
+      render json: @place, status: :created
     else
-      render json: {
-        status: {
-          message: "Place could not be created",
-          errors: @place.errors.full_messages
-        }
-      }, status: :unprocessable_entity
+      render json: @place.errors, status: :unprocessable_entity
     end
   end
 
