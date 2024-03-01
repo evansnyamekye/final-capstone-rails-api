@@ -14,7 +14,7 @@ class Api::V1::PlacesController < ApplicationController
 
   def new
     @place = Place.new
-    render json: @place 
+    render json: @place
   end
 
   # POST /places
