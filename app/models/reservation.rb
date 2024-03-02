@@ -1,4 +1,4 @@
 class Reservation < ApplicationRecord
   belongs_to :user
-  has_many :places
+  belongs_to :place
 end
