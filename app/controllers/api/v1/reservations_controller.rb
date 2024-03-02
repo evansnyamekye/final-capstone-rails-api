@@ -1,6 +1,4 @@
 class Api::V1::ReservationsController < ApplicationController
-
-
   # GET /api/v1/users/:user_id/reservations
   def index
     user = User.find(params[:user_id])
