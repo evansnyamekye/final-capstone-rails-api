@@ -209,6 +209,18 @@ describe 'Reservations API' do
         },
         required: %w[start_date end_date price place_id]
       }
+
+      response '201', 'reservation created' do
+        let(:user_id) { 1 }
+        let(:reservation) { { start_date: '2021-01-01', end_date: '2021-01-02', price: 1, place_id: 1 } }
+        run_test!
+      end
+
+      response '422', 'invalid request' do
+        let(:user_id) { 1 }
+        let(:reservation) { { start_date: '2021-01-01', end_date: '2021-01-02' } }
+        run_test!
+      end
     end
   end
 

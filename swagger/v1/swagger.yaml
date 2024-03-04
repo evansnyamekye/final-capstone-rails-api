@@ -207,6 +207,40 @@ paths:
                   - end_date
                   - price
                   - place_id
+    post:
+      summary: Creates a reservation
+      tags:
+      - Reservations
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: reservation created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date:
+                  type: string
+                end_date:
+                  type: string
+                price:
+                  type: number
+                place_id:
+                  type: number
+              required:
+              - start_date
+              - end_date
+              - price
+              - place_id
   "/api/v1/users/{user_id}/reservations/{id}":
     get:
       summary: Retrieves a reservation
