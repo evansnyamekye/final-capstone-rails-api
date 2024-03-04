@@ -39,7 +39,6 @@ class Api::V1::PlacesController < ApplicationController
 
   # DELETE /places/1
   def destroy
-    @place = current_user.places.find(params[:id])
     if @place.destroy
       render json: {
         status:{
