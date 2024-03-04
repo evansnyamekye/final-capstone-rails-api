@@ -1,0 +1,88 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/places":
+    post:
+      summary: Creates a place
+      tags:
+      - Places
+      parameters: []
+      responses:
+        '201':
+          description: place created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                photo:
+                  type: string
+                location:
+                  type: string
+                rate:
+                  type: number
+                user_id:
+                  type: number
+                address:
+                  type: string
+              required:
+              - description
+              - location
+              - rate
+              - user_id
+              - address
+  "/api/v1/places/{id}":
+    get:
+      summary: Retrieves a place
+      tags:
+      - Places
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: place found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  description:
+                    type: string
+                  photo:
+                    type: string
+                  location:
+                    type: string
+                  rate:
+                    type: number
+                  user_id:
+                    type: number
+                  address:
+                    type: string
+                required:
+                - id
+                - description
+                - location
+                - rate
+                - user_id
+                - address
+        '404':
+          description: place not found
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
