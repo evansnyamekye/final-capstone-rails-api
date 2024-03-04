@@ -51,5 +51,5 @@ group :development do
   # gem "spring"
 end
 
-gem 'rswag'
 gem 'devise'
+gem 'rswag'

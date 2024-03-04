@@ -15,7 +15,7 @@ describe 'Places API' do
           user_id: { type: :number },
           address: { type: :string }
         },
-        required: [ 'description', 'location', 'rate', 'user_id', 'address' ]
+        required: %w[description location rate user_id address]
       }
 
       response '201', 'place created' do
@@ -38,16 +38,16 @@ describe 'Places API' do
 
       response '200', 'place found' do
         schema type: :object,
-          properties: {
-            id: { type: :integer },
-            description: { type: :string },
-            photo: { type: :string },
-            location: { type: :string },
-            rate: { type: :number },
-            user_id: { type: :number },
-            address: { type: :string }
-          },
-          required: [ 'id', 'description', 'location', 'rate', 'user_id', 'address' ]
+               properties: {
+                 id: { type: :integer },
+                 description: { type: :string },
+                 photo: { type: :string },
+                 location: { type: :string },
+                 rate: { type: :number },
+                 user_id: { type: :number },
+                 address: { type: :string }
+               },
+               required: %w[id description location rate user_id address]
 
         let(:id) { Place.create(description: 'foo', location: 'bar', rate: 1, user_id: 1, address: 'baz').id }
         run_test!
@@ -75,7 +75,7 @@ describe 'Places API' do
           user_id: { type: :number },
           address: { type: :string }
         },
-        required: [ 'description', 'location', 'rate', 'user_id', 'address' ]
+        required: %w[description location rate user_id address]
       }
 
       response '200', 'place updated' do
@@ -117,19 +117,19 @@ describe 'Places API' do
 
       response '200', 'places found' do
         schema type: :array,
-          items: {
-            type: :object,
-            properties: {
-              id: { type: :integer },
-              description: { type: :string },
-              photo: { type: :string },
-              location: { type: :string },
-              rate: { type: :number },
-              user_id: { type: :number },
-              address: { type: :string }
-            },
-            required: [ 'id', 'description', 'location', 'rate', 'user_id', 'address' ]
-          }
+               items: {
+                 type: :object,
+                 properties: {
+                   id: { type: :integer },
+                   description: { type: :string },
+                   photo: { type: :string },
+                   location: { type: :string },
+                   rate: { type: :number },
+                   user_id: { type: :number },
+                   address: { type: :string }
+                 },
+                 required: %w[id description location rate user_id address]
+               }
 
         run_test!
       end
@@ -146,17 +146,17 @@ describe 'Reservations API' do
 
       response '200', 'reservations found' do
         schema type: :array,
-          items: {
-            type: :object,
-            properties: {
-              id: { type: :integer },
-              start_date: { type: :string },
-              end_date: { type: :string },
-              price: { type: :number },
-              place_id: { type: :number }
-            },
-            required: [ 'id', 'start_date', 'end_date', 'price', 'place_id' ]
-          }
+               items: {
+                 type: :object,
+                 properties: {
+                   id: { type: :integer },
+                   start_date: { type: :string },
+                   end_date: { type: :string },
+                   price: { type: :number },
+                   place_id: { type: :number }
+                 },
+                 required: %w[id start_date end_date price place_id]
+               }
 
         run_test!
       end
@@ -172,14 +172,14 @@ describe 'Reservations API' do
 
       response '200', 'reservation found' do
         schema type: :object,
-          properties: {
-            id: { type: :integer },
-            start_date: { type: :string },
-            end_date: { type: :string },
-            price: { type: :number },
-            place_id: { type: :number }
-          },
-          required: [ 'id', 'start_date', 'end_date', 'price', 'place_id' ]
+               properties: {
+                 id: { type: :integer },
+                 start_date: { type: :string },
+                 end_date: { type: :string },
+                 price: { type: :number },
+                 place_id: { type: :number }
+               },
+               required: %w[id start_date end_date price place_id]
 
         let(:id) { Reservation.create(start_date: '2021-01-01', end_date: '2021-01-02', price: 1, place_id: 1).id }
         let(:user_id) { 1 }
@@ -207,7 +207,7 @@ describe 'Reservations API' do
           price: { type: :number },
           place_id: { type: :number }
         },
-        required: [ 'start_date', 'end_date', 'price', 'place_id' ]
+        required: %w[start_date end_date price place_id]
       }
     end
   end
@@ -226,7 +226,7 @@ describe 'Reservations API' do
           price: { type: :number },
           place_id: { type: :number }
         },
-        required: [ 'start_date', 'end_date', 'price', 'place_id' ]
+        required: %w[start_date end_date price place_id]
       }
 
       response '200', 'reservation updated' do
