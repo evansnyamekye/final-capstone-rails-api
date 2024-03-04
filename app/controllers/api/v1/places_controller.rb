@@ -41,19 +41,19 @@ class Api::V1::PlacesController < ApplicationController
   def destroy
     if @place.destroy
       render json: {
-        status:{
+        status: {
           code: 200,
-          message: "Place has been deleted successfully."
+          message: 'Place has been deleted successfully.'
         }
-      }, status: :ok 
+      }, status: :ok
     else
       render json: {
-        status:{
+        status: {
           code: 500,
-          message: "The place could not be deleted."
+          message: 'The place could not be deleted.'
         }
       }, status: :internal_server_error
-    end 
+    end
   end
 
   private
