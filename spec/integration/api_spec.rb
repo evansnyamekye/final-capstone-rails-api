@@ -216,8 +216,8 @@ describe 'Reservations API' do
     put 'Updates a reservation' do
       tags 'Reservations'
       consumes 'application/json'
-      parameter name: :user_id, in: :path, type: :string
-      parameter name: :id, in: :path, type: :string
+      parameter name: 'user_id', in: :path, type: :string, require: true
+      parameter name: 'id', in: :path, type: :string, require: true
       parameter name: :reservation, in: :body, schema: {
         type: :object,
         properties: {

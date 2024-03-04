@@ -256,11 +256,13 @@ paths:
       parameters:
       - name: user_id
         in: path
+        require: true
         required: true
         schema:
           type: string
       - name: id
         in: path
+        require: true
         required: true
         schema:
           type: string
