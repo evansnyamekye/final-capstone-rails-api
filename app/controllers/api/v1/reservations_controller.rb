@@ -12,6 +12,12 @@ class Api::V1::ReservationsController < ApplicationController
     render json: reservation, status: :ok
   end
 
+  def new
+    user = User.find(params[:user_id])
+    reservation = user.reservations.build
+    render json: reservation, status: :ok
+  end
+
   # POST /api/v1/users/:user_id/reservations
   def create
     user = User.find(params[:user_id])
@@ -45,6 +51,6 @@ class Api::V1::ReservationsController < ApplicationController
   private
 
   def reservation_params
-    params.require(:reservation).permit(:start_date, :end_date, :price, :place_id)
+    params.require(:reservation).permit(:start_date, :end_date, :price, :place_id, :user_id)
   end
 end
