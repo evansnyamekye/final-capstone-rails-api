@@ -62,7 +62,7 @@
 ## 🚀 Live Demo <a name="live-demo"></a>
 
 - Coming soon.
-- [Link](https://github.com/tsheporamantso/final-capstone-react-front-end) to Stay Sphere fron-end repository
+- [Link](https://github.com/tsheporamantso/final-capstone-react-front-end) to Stay Sphere front-end repository
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
