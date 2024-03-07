@@ -139,7 +139,6 @@ Please run the following commands for test:
   rake rswag
 ```
 
-
 ### Deployment
 
 Not deployed
