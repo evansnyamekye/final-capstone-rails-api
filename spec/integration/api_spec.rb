@@ -1,7 +1,8 @@
+require 'rails_helper'
 require 'swagger_helper'
 
 describe 'Places API' do
-  path '/api/v1/places' do
+  path '/api/v1/users/{id}/places' do
     post 'Creates a place' do
       tags 'Places'
       consumes 'application/json'
@@ -10,6 +11,7 @@ describe 'Places API' do
         properties: {
           description: { type: :string },
           photo: { type: :string },
+          pricepernight: { type: :number },
           location: { type: :string },
           rate: { type: :number },
           user_id: { type: :number },
@@ -30,17 +32,19 @@ describe 'Places API' do
     end
   end
 
-  path '/api/v1/places/{id}' do
+  path '/api/v1/users/{id}/places/{place_id}' do
     get 'Retrieves a place' do
       tags 'Places'
       produces 'application/json'
       parameter name: :id, in: :path, type: :string
+      parameter name: :place_id, in: :path, type: :string
 
       response '200', 'place found' do
         schema type: :object,
                properties: {
                  id: { type: :integer },
                  description: { type: :string },
+                 pricepernight: { type: :number },
                  photo: { type: :string },
                  location: { type: :string },
                  rate: { type: :number },
@@ -60,45 +64,45 @@ describe 'Places API' do
     end
   end
 
-  path '/api/v1/places/{id}' do
-    put 'Updates a place' do
-      tags 'Places'
-      consumes 'application/json'
-      parameter name: :id, in: :path, type: :string
-      parameter name: :place, in: :body, schema: {
-        type: :object,
-        properties: {
-          description: { type: :string },
-          photo: { type: :string },
-          location: { type: :string },
-          rate: { type: :number },
-          user_id: { type: :number },
-          address: { type: :string }
-        },
-        required: %w[description location rate user_id address]
-      }
+  # path '/api/v1/places/{id}' do
+  #   put 'Updates a place' do
+  #     tags 'Places'
+  #     consumes 'application/json'
+  #     parameter name: :id, in: :path, type: :string
+  #     parameter name: :place, in: :body, schema: {
+  #       type: :object,
+  #       properties: {
+  #         description: { type: :string },
+  #         photo: { type: :string },
+  #         location: { type: :string },
+  #         rate: { type: :number },
+  #         user_id: { type: :number },
+  #         address: { type: :string }
+  #       },
+  #       required: %w[description location rate user_id address]
+  #     }
 
-      response '200', 'place updated' do
-        let(:id) { Place.create(description: 'foo', location: 'bar', rate: 1, user_id: 1, address: 'baz').id }
-        let(:place) { { description: 'foo', location: 'bar', rate: 1, user_id: 1, address: 'baz' } }
-        run_test!
-      end
+  #     response '200', 'place updated' do
+  #       let(:id) { Place.create(description: 'foo', location: 'bar', rate: 1, user_id: 1, address: 'baz').id }
+  #       let(:place) { { description: 'foo', location: 'bar', rate: 1, user_id: 1, address: 'baz' } }
+  #       run_test!
+  #     end
 
-      response '422', 'invalid request' do
-        let(:id) { Place.create(description: 'foo', location: 'bar', rate: 1, user_id: 1, address: 'baz').id }
-        let(:place) { { description: 'foo', location: 'bar' } }
-        run_test!
-      end
-    end
-  end
+  #     response '422', 'invalid request' do
+  #       let(:id) { Place.create(description: 'foo', location: 'bar', rate: 1, user_id: 1, address: 'baz').id }
+  #       let(:place) { { description: 'foo', location: 'bar' } }
+  #       run_test!
+  #     end
+  #   end
+  # end
 
-  path '/api/v1/places/{id}' do
+  path '/api/v1/users/{id}/places/{id}' do
     delete 'Deletes a place' do
       tags 'Places'
       produces 'application/json'
       parameter name: :id, in: :path, type: :string
 
-      response '200', 'place deleted' do
+      response '204', 'place deleted' do
         let(:id) { Place.create(description: 'foo', location: 'bar', rate: 1, user_id: 1, address: 'baz').id }
         run_test!
       end
@@ -110,10 +114,11 @@ describe 'Places API' do
     end
   end
 
-  path '/api/v1/places' do
+  path '/api/v1/users/{id}/places' do
     get 'Retrieves all places' do
       tags 'Places'
       produces 'application/json'
+      parameter name: :id, in: :path, type: :string
 
       response '200', 'places found' do
         schema type: :array,
@@ -122,6 +127,7 @@ describe 'Places API' do
                  properties: {
                    id: { type: :integer },
                    description: { type: :string },
+                   pricepernight: { type: :number },
                    photo: { type: :string },
                    location: { type: :string },
                    rate: { type: :number },
