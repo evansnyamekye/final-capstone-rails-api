@@ -4,7 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/places":
+  "/api/v1/users/{id}/places":
     post:
       summary: Creates a place
       tags:
@@ -25,6 +25,8 @@ paths:
                   type: string
                 photo:
                   type: string
+                pricepernight:
+                  type: number
                 location:
                   type: string
                 rate:
@@ -43,6 +45,12 @@ paths:
       summary: Retrieves all places
       tags:
       - Places
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: places found
@@ -57,6 +65,8 @@ paths:
                       type: integer
                     description:
                       type: string
+                    pricepernight:
+                      type: number
                     photo:
                       type: string
                     location:
@@ -74,13 +84,18 @@ paths:
                   - rate
                   - user_id
                   - address
-  "/api/v1/places/{id}":
+  "/api/v1/users/{id}/places/{place_id}":
     get:
       summary: Retrieves a place
       tags:
       - Places
       parameters:
       - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: place_id
         in: path
         required: true
         schema:
@@ -97,6 +112,8 @@ paths:
                     type: integer
                   description:
                     type: string
+                  pricepernight:
+                    type: number
                   photo:
                     type: string
                   location:
@@ -116,45 +133,7 @@ paths:
                 - address
         '404':
           description: place not found
-    put:
-      summary: Updates a place
-      tags:
-      - Places
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: place updated
-        '422':
-          description: invalid request
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                description:
-                  type: string
-                photo:
-                  type: string
-                location:
-                  type: string
-                rate:
-                  type: number
-                user_id:
-                  type: number
-                address:
-                  type: string
-              required:
-              - description
-              - location
-              - rate
-              - user_id
-              - address
+  "/api/v1/users/{id}/places/{id}":
     delete:
       summary: Deletes a place
       tags:
@@ -166,7 +145,7 @@ paths:
         schema:
           type: string
       responses:
-        '200':
+        '204':
           description: place deleted
         '404':
           description: place not found
@@ -345,7 +324,7 @@ paths:
         '404':
           description: reservation not found
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: localhost:3000

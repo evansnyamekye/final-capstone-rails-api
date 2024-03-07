@@ -95,7 +95,7 @@ Make sure you setup and run the back-end first.
 Install this project with:
 
 ```sh
-  npm install
+  bundle install
 ```
 
 ```sh
@@ -112,7 +112,15 @@ Install this project with:
 To run the project, execute the following command:
 
 ```sh
-  npm start
+  rails server
+
+```
+### Test
+
+To test API documentation please visit below url: 
+
+```sh
+  http://localhost:3000/api-docs/index.html
 ```
 
 
