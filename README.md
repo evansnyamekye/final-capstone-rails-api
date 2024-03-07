@@ -132,10 +132,11 @@ To run the project, execute the following command:
 ```
 ### Test
 
-To test API documentation please visit below url: 
+Please run the following commands for test: 
 
 ```sh
-  http://localhost:3000/api-docs/index.html
+  rspec spec/models
+  rake rswag
 ```
 
 
